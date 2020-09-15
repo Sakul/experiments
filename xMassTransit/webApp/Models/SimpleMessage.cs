@@ -1,4 +1,4 @@
-namespace xMassTransit.Messages
+namespace webApp.Models
 {
     public class SimpleMessage
     {
