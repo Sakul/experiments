@@ -8,7 +8,7 @@ namespace ch3_hmac
 	{
 		static void Main(string[] args)
 		{
-			var key = new byte[32]; // Key size (32 bytes)
+			var key = new byte[32]; // Key size (32 byte)
 			using var rng = new RNGCryptoServiceProvider();
 			rng.GetBytes(key);
 
@@ -22,19 +22,19 @@ namespace ch3_hmac
 			Console.WriteLine(GetHMACText(plainText2, hmacMD5));
 			Console.WriteLine(GetHMACText(longestText, hmacMD5));
 
-			Console.WriteLine("HMACSHA-1");
+			Console.WriteLine("\nHMACSHA-1");
 			using var hmacSHA1 = new HMACSHA1(key);
 			Console.WriteLine(GetHMACText(plainText1, hmacSHA1));
 			Console.WriteLine(GetHMACText(plainText2, hmacSHA1));
 			Console.WriteLine(GetHMACText(longestText, hmacSHA1));
 
-			Console.WriteLine("HMACSHA-256");
+			Console.WriteLine("\nHMACSHA-256");
 			using var hmacSHA256 = new HMACSHA256(key);
 			Console.WriteLine(GetHMACText(plainText1, hmacSHA256));
 			Console.WriteLine(GetHMACText(plainText2, hmacSHA256));
 			Console.WriteLine(GetHMACText(longestText, hmacSHA256));
 
-			Console.WriteLine("HMACSHA-512");
+			Console.WriteLine("\nHMACSHA-512");
 			using var hmacSHA512 = new HMACSHA512(key);
 			Console.WriteLine(GetHMACText(plainText1, hmacSHA512));
 			Console.WriteLine(GetHMACText(plainText2, hmacSHA512));
