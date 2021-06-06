@@ -32,7 +32,7 @@
 * .NET `Rfc2898DeriveBytes`
 
 # 6.Symmetric Encryption
-* Single for Encryption & Decryption
+* Single key for Encryption & Decryption
 	* Plain text > Encrypt > CipherText > Decrypt > Plain text
 * Fast but hard to share
 * Longer keys are exponentially harder to crack
@@ -55,17 +55,17 @@
 
 ## Brute Force Attack
 |Key size|Time to crack|
-|56 bit|399 second|
-|128 bit| 1.02 x 10^18 years| 1 BB years|
-|192 bit| 1.87 x 10^37 years|
-|256 bit| 3.31 x 10^56 years|
+|56 bit (8 byte)|399 second|
+|128 bit (16 byte)| 1.02 x 10^18 years| 1 BB years|
+|192 bit (24 byte)| 1.87 x 10^37 years|
+|256 bit (32 byte)| 3.31 x 10^56 years|
 
 ## Initialize Value
 * It is just a random value like salt
 * Required this value for Encryption & Description
 * No secret data in it
 
-## Symmetric algorithm
+## Symmetric Algorithm
 * Cipher Modes
 	* CBC - Cipher Block Chaining (Default)
 	* CFB - Ciphertext feedback
@@ -81,5 +81,33 @@
 	* PKCS7 [Default]
 	* Zeros
 
-# Asymmetric Encryption (RSA)
+# 7.Asymmetric Encryption (RSA)
+* Paired Key (Encrypt & Decrypt)
+* Key size
+	* 1024 bit (Weak)
+	* 2048 bit
+	* 4096 bit
+* Slow but easy to share
+	* Protect sensitive data like AES
+* Verifiable
+* .NET `RSACryptoServiceProvider`
+	* In memory keys
+	* Key Container
+	* ~~XML~~ [Deprecated]
+
+## Key Derivation
+* Properties
+	* Exponent
+	* Modules
+	* InverseQ (Private key only)
+	* P prime (Private key only)
+	* Q prime (Private key only)
+	* D (Private key only)
+	* DP (Private key only)
+	* DQ (Private key only)
+
+## Exporting RSA Keys
+* .NET `ExportPKCS8PrivateKey`
+* .NET `ExportEncryptedPKCS8PrivateKey`
+
 # Digital Signatures
