@@ -55,6 +55,7 @@
 
 ## Brute Force Attack
 |Key size|Time to crack|
+|--|--|
 |56 bit (8 byte)|399 second|
 |128 bit (16 byte)| 1.02 x 10^18 years| 1 BB years|
 |192 bit (24 byte)| 1.87 x 10^37 years|
@@ -120,3 +121,27 @@
 * Signature Formatters
 	* .NET `RSAPKCS1SignatureFormatter`
 	* .NET `RSAPKCS1SignatureDeFormatter`
+
+# 9.Security In Practice
+* Verify secret data doesn't change >> HMAC(secret)
+* Verify the sender >> Digital Signature
+* Protect the message >> Encryption
+* .NET `CryptographicException`
+* **Scenario**: John want to send a secret message to Jane
+	1. John & Jane create their own public and private keys
+	2. John & Jane publish their public key
+	3. John send a secret package to Jane
+		1. Create AES as a `SessionKey`
+		2. Encrypt the message with the SessionKey
+		3. Encrypt the SessionKey with `Jane's public key` (only Jane who has the private key can read the message)
+		4. Create HMAC from the `EncryptedMessage` with the SessionKey (Jane can verify the secret doesn't change)
+		5. Sign HMAC with `John's private key` (Jane can verify the sender is John or not)
+	4. Jane read the secret package
+		1. Decrypt the package's EncryptedSessionKey with `Jane's PrivateKey`
+		2. Verify HMAC
+		3. Verify Signature with `John's PublicKey`
+		4. Decrypt package's EncryptedMessage with the DecryptedSessionKey
+
+## Timing attack
+* Attackers can finding secrets through timing information may be significantly easier than using cryptanalysis of known plaintext.
+* Avoidance of timing attacks involves design of `constant-time`
